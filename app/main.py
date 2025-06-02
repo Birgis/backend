@@ -37,6 +37,7 @@ from app.config import settings
 from app.file_handler import save_upload_file, is_valid_file_type
 from app.websocket_manager import manager
 from fastapi.exceptions import RequestValidationError
+import uvicorn
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -363,3 +364,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
             "error_type": "validation_error",
         },
     )
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
